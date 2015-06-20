@@ -83,6 +83,14 @@ abstract class PLL_Choose_Lang {
 	 * @return object browser preferred language or default language
 	 */
 	public function get_preferred_language() {
+		global $pc_slug_to_languages;
+        foreach ( $pc_slug_to_languages as $slug_pattern => $lang )
+        {
+            if ( preg_match( $slug_pattern, $_SERVER['REQUEST_URI'] ) ) {
+                return $this->model->get_language($lang);
+            }
+        }
+
 		// check first if the user was already browsing this site
 		if (isset($_COOKIE[PLL_COOKIE]))
 			return $this->model->get_language($_COOKIE[PLL_COOKIE]);
