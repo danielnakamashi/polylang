@@ -86,7 +86,7 @@ class PLL_Frontend extends PLL_Base {
 		// take care not to break queries for non visible post types such as nav_menu_items
 		// do not filter if lang is set to an empty value
 		// do not filter single page and translated taxonomies to avoid conflicts
-		if (!empty($this->curlang) && !isset($qv['lang']) && !$has_tax && empty($qv['page_id']) && empty($qv['pagename']) && (empty($qv['post_type']) || $this->model->is_translated_post_type($qv['post_type']))) {
+		if (!empty($this->curlang) && !isset($qv['lang']) && !$has_tax && empty($qv['page_id']) && empty($qv['pagename']) && $this->model->is_translated_post_type($qv['post_type'])) {
 			$this->choose_lang->set_lang_query_var($query, $this->curlang);
 		}
 
